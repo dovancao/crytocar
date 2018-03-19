@@ -69,6 +69,29 @@ contract CarOwnerShip is CarBase, ERC721 {
         require(owner !=address(0));
     }
 
+    // xác định xem người có dịa chỉ xác định đang sở hữu những token có ID nào
+    function tokenOfOwner(address _owner) external view returns(uint256[] ownerTokens) {
+        uint256 tokenCount = balanceOf(_owner);
+        if(tokenCount == 0){
+            return new uint256[](0);
+        }else {
+            uint256[] memory result = new uint256[](tokenCount);
+            uint256 totalCats = totalSupply();
+            uint256 resultIndex = 0;
+            uint256 carId;
+
+            for(carId = 1; carId <=totalCats; carId++){
+                if(kittyIndexToOwner[carId] == _owner){
+                    result[resultIndex] = carId;
+                    resultIndex++
+                }
+            }
+            return result;
+        }
+    }
+    
+
+
 
     function CarOwnerShip(){
 

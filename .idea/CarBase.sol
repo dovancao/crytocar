@@ -2,13 +2,10 @@ pragma solidity ^0.4.0;
 
 contract CarBase is CarAccessControl {
 
-    event Create(address owner, uint256 carId, uint256 matronId, uint256 generation, string type)
-
     struct CarBase{
         string name;
         string type;
         uint16 generation;
-        uint16 color;
         uint64 upgradeTime;
         uint64 cooldownUpgrade; // thoi gian gioi han giua 2 lan do xe
         uint32 matronId;        //id cua xe duoc do khi đập với búa
@@ -35,7 +32,7 @@ contract CarBase is CarAccessControl {
     // thoi gian giua cac block la
     uint256 public secondsPerBlock = 15;
 
-    Car[]  cars; /// tạo 1 mảng chứa car
+    Car[] cars; /// tạo 1 mảng chứa car
 
     mapping (uint256 => address)  public carIndexToOwner;       //mapping đưa vào iD của car va trả về address của chủ sở hữ
     mapping (address => uint256)  public ownershipTokenCount;   // trả về số token (số car) mà người đó sở hữu
@@ -51,18 +48,6 @@ contract CarBase is CarAccessControl {
               delete carIndexToApproval[_tokenId];
         }
         Transfer(_from, _to, _tokenId);
-    }
-
-    function _creatCar(
-            address _owner;
-            uint256 _matronId;
-            string _type;
-            uint256 _color;
-            uint256 _generation;
-    ) interal returns (uint) {
-            require(_matronId == uint256(uint32(_matronId)));
-            require(_color  == uint256(uint32(_color));
-            require(_generation == uint256(uint16(_generation)));
     }
 
 }
