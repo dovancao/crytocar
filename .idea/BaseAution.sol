@@ -1,6 +1,6 @@
 pragma solidity ^0.4.0;
 
-contract BaseAution {
+contract BaseAuction {
     function BaseAution(){
 
     }
